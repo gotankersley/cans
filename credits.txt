@@ -1,0 +1,17 @@
+Libraries:
+- Three.js
+- Physijs
+
+Textures:
+- 
+
+Tools:
+- Blender
+- Notepad++
+- XnView
+- Gimp
+
+Reference:
+- BlendSwap
+- Opengl-tutorials
+- Lee Stemkoski's tutorials
