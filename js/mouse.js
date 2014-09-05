@@ -10,8 +10,7 @@
 function onMouseUp(e) {	
 	if (mouse.drag) {
 		mouse.drag = false;
-		controls.enabled = true;
-		//selectedCan.material = new THREE.MeshLambertMaterial({color:'#ff0000'});		
+		controls.enabled = true;		
 		var zero = new THREE.Vector3(0,0,0);
 		var one = new THREE.Vector3(1,1,1);
 		selectedCan.setAngularFactor( one ); //Set to 0101 for zero-gravity

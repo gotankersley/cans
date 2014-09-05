@@ -14,15 +14,17 @@ var projector;
 var mouse = {x:0, y: 0, drag:false};
 var cursor = new THREE.Vector3;
 
-var selectedCan;
-var cans = [];
+var labelMaterials = [];
+var loadingCount;
 
 //Global objects
 var camera;
-var platonicCan;
 var floor;
 var intersectPlane;
+var platonicCan;
+var selectedCan;
+var cans = [];
 
 //Global materials
-var topMaterial;
+var topMaterial = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture('textures/tops.png')});
 

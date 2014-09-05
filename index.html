@@ -5,20 +5,24 @@
 <style>
 body {margin: 0px; }
 canvas {display: block; }
+#info { position: absolute; color: white; font-weight: bold; font-size: xx-large}
 </style>
 <title>Stack O' Cans</title>
 </head>
 <body>
+<div id="info">Loading textures: <span id="loadingCount"></div></div>
 <script src="lib/three.min.js"></script>
 <script src="lib/orbital-camera.js"></script>
+<script src="lib/dat.gui.min.js"></script>
 <script src="lib/physi.js"></script>
 <script>
 Physijs.scripts.worker = 'lib/physijs_worker.js';
-Physijs.scripts.ammo = 'lib/ammo.js';
+Physijs.scripts.ammo = 'ammo.js';
 </script>
 
 <script src="js/globals.js"></script>
-<script src="js/scene.js"></script>
 <script src="js/mouse.js"></script>
+<script src="js/cans.js"></script>
+<script src="js/scene.js"></script>
 </body>
 </html>

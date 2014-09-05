@@ -1,0 +1,3 @@
+Possible features to add:
+- Sounds
+- Canalizer - use as graph visualization

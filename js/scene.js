@@ -1,5 +1,6 @@
 'use strict';
 
+initScene();
 function initScene() {
 		
 	scene = new Physijs.Scene;
@@ -26,6 +27,7 @@ function initScene() {
 	document.addEventListener('mousemove', onMouseMove, false );
 	projector = new THREE.Projector();
 	renderer.shadowMapEnabled = true;	
+	loadingCount = document.getElementById("loadingCount");
 	
 	//Lighting
 	var light = new THREE.SpotLight(0xdfebff, 3);    
@@ -60,13 +62,13 @@ function initScene() {
 	intersectPlane.visible = false;
 	scene.add(intersectPlane);		
 	
-	//Can model
-	topMaterial = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture( 'textures/tops.png')});
+	//Can model - Display platonic can while textures are loading		
 	var jsonLoader = new THREE.JSONLoader();	
 	jsonLoader.load('models/can.js', loadCan);   	
 	
-
+	
 }
+
 
 function render() {	
 	requestAnimationFrame( render );

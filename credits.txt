@@ -2,9 +2,6 @@ Libraries:
 - Three.js
 - Physijs
 
-Textures:
-- 
-
 Tools:
 - Blender
 - Notepad++
@@ -13,5 +10,4 @@ Tools:
 
 Reference:
 - BlendSwap
-- Opengl-tutorials
 - Lee Stemkoski's tutorials
