@@ -3,7 +3,8 @@ var GUI = {
 	'Update': function() { resetCans(); },
 	'Shadows': true,
 	'Popping cans': false,
-	'Zero gravity': false
+	'Zero gravity': false,
+	'Floor texture': true
 };
 
 window.onload = function() { 
@@ -17,4 +18,7 @@ window.onload = function() {
   
   gui.add(GUI, 'Popping cans');
   gui.add(GUI, 'Zero gravity');
+  gui.add(GUI, 'Floor texture').onChange(function() {
+	floor.material = GUI['Floor texture']? floorText : floorUntext;		
+  });
 }

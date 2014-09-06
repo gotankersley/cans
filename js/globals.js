@@ -28,4 +28,9 @@ var canGeo;
 
 //Global materials
 var topMat = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture('textures/tops.png')});
+var floorTexture = new THREE.ImageUtils.loadTexture( 'textures/checkerboard.jpg' );
+floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping; 
+floorTexture.repeat.set( 20, 20 );
+var floorText = new THREE.MeshBasicMaterial({ map: floorTexture, side: THREE.DoubleSide} );	
+var floorUntext = new THREE.MeshBasicMaterial({color: 0x888888, side: THREE.DoubleSide});
 

@@ -48,11 +48,9 @@ function initScene() {
 	scene.add(hemi);	
 	
 	//Floor
-	var floorGeometry = new THREE.BoxGeometry(100, 1, 100);
-	var floorMaterial = new THREE.MeshLambertMaterial({
-		color: 0x888888,
-	});
-	floor = new Physijs.BoxMesh(floorGeometry, floorMaterial, 0);	
+	var floorGeometry = new THREE.BoxGeometry(100, 1, 100);	
+	var floorMat = GUI['Floor texture']? floorText : floorUntext;	
+	floor = new Physijs.BoxMesh(floorGeometry, floorMat, 0);	
 	floor.receiveShadow = true;
 	floor.position.set(0, -1, 0);
 	scene.add(floor);
