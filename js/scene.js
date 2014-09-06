@@ -1,8 +1,8 @@
 'use strict';
 
 initScene();
-function initScene() {
-		
+var light;
+function initScene() {	
 	scene = new Physijs.Scene;
 		
 	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;		
@@ -26,11 +26,11 @@ function initScene() {
 	document.addEventListener('mouseup', onMouseUp, false );
 	document.addEventListener('mousemove', onMouseMove, false );
 	projector = new THREE.Projector();
-	renderer.shadowMapEnabled = true;	
+	renderer.shadowMapEnabled = GUI['Shadows'];
 	loadingCount = document.getElementById("loadingCount");
 	
 	//Lighting
-	var light = new THREE.SpotLight(0xdfebff, 3);    
+	light = new THREE.SpotLight(0xdfebff, 3);    
     light.position.multiplyScalar(1.3);
 		
 	light.position.set(-60, 120, -30);

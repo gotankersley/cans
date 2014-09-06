@@ -26,10 +26,10 @@ function loadCan(geometry, materials) {
 	loadingCount.innerHTML = "[1/" + textures.length + "]";		
 	
 	loadTextures(0, function(){	
-		var rows = [3];
-		//for(var i = (Math.random()*20); i > 0; i--){
-		//	rows.push(Math.ceil(Math.random() * 36));
-		//}
+		var rows = [];//[GUI['Can rows']];//GUI['Can rows']];
+		for(var i = (Math.random()*GUI['Can rows']); i > 0; i--){
+			rows.push(Math.ceil(Math.random() * 36));
+		}
 				
 		var canRows = canCoords(rows);		
 		for (var r = 0; r < canRows.length; r++) {	
@@ -47,7 +47,9 @@ function loadCan(geometry, materials) {
 			}			
 		}		
 
-		document.getElementById('info').innerHTML = '';		
+		setTimeout(function() {
+			document.getElementById('info').innerHTML = '';		
+		}, 1000);
 		scene.remove(platonicCan);		
 		for (var i = 0; i < cans.length; i++) {		
 			scene.add(cans[i]);	

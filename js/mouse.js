@@ -13,10 +13,18 @@ function onMouseUp(e) {
 		controls.enabled = true;		
 		var zero = new THREE.Vector3(0,0,0);
 		var one = new THREE.Vector3(1,1,1);
-		selectedCan.setAngularFactor( one ); //Set to 0101 for zero-gravity
-		selectedCan.setAngularVelocity( zero );
-		selectedCan.setLinearFactor( one );
-		selectedCan.setLinearVelocity( zero );
+		if (GUI['Zero gravity']) { //0101 for zero-gravity
+			selectedCan.setAngularFactor( zero ); 
+			selectedCan.setAngularVelocity( one );
+			selectedCan.setLinearFactor( zero );
+			selectedCan.setLinearVelocity( one );
+		}
+		else {		
+			selectedCan.setAngularFactor( one ); 
+			selectedCan.setAngularVelocity( zero );
+			selectedCan.setLinearFactor( one );
+			selectedCan.setLinearVelocity( zero );
+		}
 	}
 }
 
@@ -43,14 +51,9 @@ function onMouseMove(e) {
 			selectedCan.setLinearVelocity( zero );
 		}
 		else {
-			var mouseDelta = new THREE.Vector3();
-			//mouseDelta.copy(newCursor).sub(cursor).multiplyScalar(100);			
-			mouseDelta.copy(newCursor).sub(selectedCan.position).multiplyScalar(5);			
-			
-			//selectedCan.position.copy(intersects[0].point).sub(intersectPlane.position);
-	//		selectedCan.setLinearFactor( new THREE.Vector3(1, 1, 1));
-			selectedCan.setLinearVelocity(mouseDelta);
-			//selectedCan.setLinearFactor( new THREE.Vector3(1,1,1) );
+			var mouseDelta = new THREE.Vector3();			
+			mouseDelta.copy(newCursor).sub(selectedCan.position).multiplyScalar(5);						
+			selectedCan.setLinearVelocity(mouseDelta);			
 		}
 		cursor.copy(newCursor);	
 		
@@ -67,7 +70,10 @@ function mousePick() {
 	
 	if (intersects.length > 0 ) {		
 		selectedCan = intersects[0].object;
-		
+		if (GUI['Popping cans']) {
+			selectedCan.setLinearVelocity(new THREE.Vector3(0, 4, 0));
+			return;
+		}
 		controls.enabled = false;		
 		mouse.drag = true;		
 		intersectPlane.position.copy(selectedCan.position);
