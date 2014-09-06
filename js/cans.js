@@ -18,44 +18,53 @@ function loadTextures(currentText, completeFn) {
 }
 
 function loadCan(geometry, materials) {		
+	canGeo = geometry.clone();
 	var platonicMat = new THREE.MeshPhongMaterial({color:0xff0000});
-	var platonicGeo = geometry.clone();
-	platonicCan = new THREE.Mesh(platonicGeo, platonicMat);		
+	platonicCan = new THREE.Mesh(geometry, platonicMat);		
 	platonicCan.castShadow = true;	
 	scene.add(platonicCan);		
 	loadingCount.innerHTML = "[1/" + textures.length + "]";		
 	
-	loadTextures(0, function(){	
-		var rows = [];//[GUI['Can rows']];//GUI['Can rows']];
-		for(var i = (Math.random()*GUI['Can rows']); i > 0; i--){
-			rows.push(Math.ceil(Math.random() * 36));
-		}
-				
-		var canRows = canCoords(rows);		
-		for (var r = 0; r < canRows.length; r++) {	
-			var row = canRows[r];
-			var material = labelMaterials[Math.floor(Math.random() * labelMaterials.length)]; //Assign random label			
-			for (var c = 0; c < row.length; c++) {			
-				var coord = row[c];
-				var can = new Physijs.BoxMesh(geometry, new THREE.MeshPhongMaterial({color: 0xffffff }));					
-				can.position.set(coord.x, coord.y, coord.z);
-				can.rotation.y = Math.random() * Math.PI*2;				
-				//can.rotation.x = Math.PI/4;
-				can.material = material;
-				can.castShadow = true;				
-				cans.push(can);							
-			}			
-		}		
-
-		setTimeout(function() {
-			document.getElementById('info').innerHTML = '';		
-		}, 1000);
-		scene.remove(platonicCan);		
-		for (var i = 0; i < cans.length; i++) {		
-			scene.add(cans[i]);	
-		}						
-	});
+	loadTextures(0, placeCans);								
 	render();
+}
+
+function resetCans() {
+	for (var i = 0; i < cans.length; i++) {
+		scene.remove(cans[i]);
+	}
+	cans = [];
+	placeCans();
+}
+function placeCans() {
+	var rows = [];	
+	for(var i = GUI['Can rows']; i > 0; i--){
+		rows.push(Math.ceil(Math.random() * 36));		
+	}
+			
+	var canRows = canCoords(rows);		
+	for (var r = 0; r < canRows.length; r++) {	
+		var row = canRows[r];
+		var material = labelMaterials[Math.floor(Math.random() * labelMaterials.length)]; //Assign random label			
+		for (var c = 0; c < row.length; c++) {			
+			var coord = row[c];
+			var can = new Physijs.BoxMesh(canGeo, new THREE.MeshPhongMaterial({color: 0xffffff }));					
+			can.position.set(coord.x, coord.y, coord.z);
+			can.rotation.y = Math.random() * Math.PI*2;				
+			//can.rotation.x = Math.PI/4;
+			can.material = material;
+			can.castShadow = true;				
+			cans.push(can);							
+		}			
+	}		
+
+	setTimeout(function() { //Keep loading message from flashing too fast
+		document.getElementById('info').innerHTML = '';		
+	}, 1000);
+	scene.remove(platonicCan);		
+	for (var i = 0; i < cans.length; i++) {		
+		scene.add(cans[i]);	
+	}
 }
 
 //Stacking algorithm - each can is 1 unit tall

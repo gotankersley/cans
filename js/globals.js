@@ -24,6 +24,7 @@ var intersectPlane;
 var platonicCan;
 var selectedCan;
 var cans = [];
+var canGeo;
 
 //Global materials
 var topMat = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture('textures/tops.png')});
