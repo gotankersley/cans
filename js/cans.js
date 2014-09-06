@@ -17,16 +17,38 @@ function loadTextures(currentText, completeFn) {
 	});	
 }
 
-function loadCan(geometry, materials) {		
-	canGeo = geometry.clone();
-	var platonicMat = new THREE.MeshPhongMaterial({color:0xff0000});
-	platonicCan = new THREE.Mesh(geometry, platonicMat);		
-	platonicCan.castShadow = true;	
-	scene.add(platonicCan);		
+function loadCan(geometry, materials) {			
+	canGeo = geometry.clone(); //Cans have to use cloned geo to show - render bug?
+	showPlatonicCan(geometry);
+		
 	loadingCount.innerHTML = "[1/" + textures.length + "]";		
 	
 	loadTextures(0, placeCans);								
 	render();
+}
+
+//Platonic can - only visible while loading
+function showPlatonicCan(geometry) {
+	var platonicCanvas = document.createElement('canvas');
+	//Use 2D canvas as texture
+	var ctx = platonicCanvas.getContext('2d');
+	ctx.font = 'Bold 40px serif';
+	ctx.fillStyle = 'rgba(255,0,0,0.95)';
+    ctx.fillRect(0,0,platonicCanvas.width,platonicCanvas.height);
+	ctx.rotate(Math.PI/8);
+	ctx.fillStyle = 'black';
+    ctx.fillText('Platonic Can', 20, 50);
+	
+	var platonicText = new THREE.Texture(platonicCanvas) 
+	platonicText.needsUpdate = true;
+	var platonicMat = new THREE.MeshBasicMaterial( {map: platonicText, side:THREE.DoubleSide } );
+	var platonicTop = new THREE.MeshBasicMaterial({color:0xaaaaaa});
+	var platonicMats = new THREE.MeshFaceMaterial([platonicMat, platonicTop]);						
+    //platonicMat.transparent = true;
+	//var platonicMat = new THREE.MeshPhongMaterial({color:0xff0000});
+	platonicCan = new THREE.Mesh(geometry, platonicMats);		
+	platonicCan.castShadow = true;	
+	scene.add(platonicCan);	
 }
 
 function resetCans() {
