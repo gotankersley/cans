@@ -26,5 +26,5 @@ var selectedCan;
 var cans = [];
 
 //Global materials
-var topMaterial = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture('textures/tops.png')});
+var topMat = new THREE.MeshPhongMaterial({map:new THREE.ImageUtils.loadTexture('textures/tops.png')});
 
