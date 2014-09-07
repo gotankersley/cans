@@ -1,10 +1,11 @@
 var GUI = {
 	'Can rows': 1,
-	'Update': function() { resetCans(); },
+	'Reset': function() { resetCans(); },
 	'Shadows': true,
 	'Popping cans': false,
 	'Zero gravity': false,
-	'Floor texture': true	
+	'Floor texture': true,
+	'Kaboom': function() {kaboom(); }
 };
 
 window.onload = function() {
@@ -13,6 +14,7 @@ window.onload = function() {
 	var folderPhysics = gui.addFolder('Physics');
 	folderPhysics.add(GUI, 'Popping cans');
 	folderPhysics.add(GUI, 'Zero gravity');
+	folderPhysics.add(GUI, 'Kaboom');
 	
 	//Soda types
 	var folderTypes = gui.addFolder('Soda types');
@@ -34,5 +36,5 @@ window.onload = function() {
 	
 	
 	gui.add(GUI, 'Can rows').min(1).max(10).step(1);
-	gui.add(GUI, 'Update');
+	gui.add(GUI, 'Reset');
 }

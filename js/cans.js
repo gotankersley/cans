@@ -41,14 +41,21 @@ function showPlatonicCan(geometry) {
 	
 	var platonicText = new THREE.Texture(platonicCanvas) 
 	platonicText.needsUpdate = true;
-	var platonicMat = new THREE.MeshBasicMaterial( {map: platonicText, side:THREE.DoubleSide } );
-	var platonicTop = new THREE.MeshBasicMaterial({color:0xaaaaaa});
+	var platonicMat = new THREE.MeshPhongMaterial( {map: platonicText, side:THREE.DoubleSide } );
+	var platonicTop = new THREE.MeshPhongMaterial({color:0xaaaaaa});
 	var platonicMats = new THREE.MeshFaceMaterial([platonicMat, platonicTop]);						
-    //platonicMat.transparent = true;
-	//var platonicMat = new THREE.MeshPhongMaterial({color:0xff0000});
+    
 	platonicCan = new THREE.Mesh(geometry, platonicMats);		
 	platonicCan.castShadow = true;	
 	scene.add(platonicCan);	
+}
+
+function kaboom() {
+	for (var i = 0; i < cans.length; i++) {
+		var can = cans[i];		
+		can.setLinearVelocity(new THREE.Vector3(Math.random() * 10,Math.random() * 10,Math.random() * 10));
+		can.setAngularVelocity(new THREE.Vector3(Math.random() * 10,Math.random() * 10,Math.random() * 10));
+	}
 }
 
 function resetCans() {
@@ -72,8 +79,7 @@ function placeCans() {
 			var coord = row[c];
 			var can = new Physijs.BoxMesh(canGeo, new THREE.MeshPhongMaterial({color: 0xffffff }));					
 			can.position.set(coord.x, coord.y, coord.z);
-			can.rotation.y = Math.random() * Math.PI*2;				
-			//can.rotation.x = Math.PI/4;
+			can.rotation.y = Math.random() * Math.PI*2;							
 			can.material = material;
 			can.castShadow = true;				
 			cans.push(can);							
