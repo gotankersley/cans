@@ -11,3 +11,7 @@ Tools:
 Reference:
 - BlendSwap
 - Lee Stemkoski's tutorials
+
+Texture images found using images.google.com
+
+Note that we are in no way affiliated with Coke, Pepsi any other beverage company.

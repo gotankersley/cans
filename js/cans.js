@@ -65,16 +65,27 @@ function resetCans() {
 	cans = [];
 	placeCans();
 }
+
+function changeCansEnabled(enabled) {
+	labelsEnabled[this.property] = enabled;
+}
+
 function placeCans() {
 	var rows = [];	
 	for(var i = GUI['Can rows']; i > 0; i--){
-		rows.push(Math.ceil(Math.random() * 36));		
+		rows.push(Math.ceil(Math.random() * GUI['Can max']));		
 	}
 			
+	var materials = [];
+	for (var i = 0; i < textures.length; i++) {
+		var text = textures[i].replace(/(.png|.jpg)/i, '');
+		if (labelsEnabled[text]) materials.push(labelMaterials[i]);
+	}	
+	if (materials.length == 0) materials.push(labelMaterials[0]);
 	var canRows = canCoords(rows);		
 	for (var r = 0; r < canRows.length; r++) {	
 		var row = canRows[r];
-		var material = labelMaterials[Math.floor(Math.random() * labelMaterials.length)]; //Assign random label			
+		var material = materials[Math.floor(Math.random() * materials.length)]; //Assign random label			
 		for (var c = 0; c < row.length; c++) {			
 			var coord = row[c];
 			var can = new Physijs.BoxMesh(canGeo, new THREE.MeshPhongMaterial({color: 0xffffff }));					

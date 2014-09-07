@@ -1,5 +1,6 @@
 var GUI = {
 	'Can rows': 1,
+	'Can max':36,
 	'Reset': function() { resetCans(); },
 	'Shadows': true,
 	'Popping cans': false,
@@ -20,8 +21,10 @@ window.onload = function() {
 	var folderTypes = gui.addFolder('Soda types');
 	for (var i = 0; i < textures.length; i++) {
 		var text = textures[i];
+		text = text.replace(/(.png|.jpg)/i, '');
+		labelsEnabled[text] = true;
 		GUI[text] = true;
-		folderTypes.add(GUI, text);
+		folderTypes.add(GUI, text).onChange(changeCansEnabled);
 	}	
 	
 	//Rendering options
@@ -36,5 +39,6 @@ window.onload = function() {
 	
 	
 	gui.add(GUI, 'Can rows').min(1).max(10).step(1);
+	gui.add(GUI, 'Can max').min(1).max(36).step(1);
 	gui.add(GUI, 'Reset');
 }

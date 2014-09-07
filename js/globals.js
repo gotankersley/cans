@@ -15,6 +15,7 @@ var mouse = {x:0, y: 0, drag:false};
 var cursor = new THREE.Vector3;
 
 var labelMaterials = [];
+var labelsEnabled = [];
 var loadingCount;
 
 //Global objects
